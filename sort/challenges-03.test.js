@@ -19,7 +19,7 @@ let $ = createSnippetWithJQuery(`
 
 const changeAllClassNames = () => {
   // Solution code here...
- // $("li").removeClass()
+ // $("#fruits").children().addClass('fruit')
   $("li").addClass('fruit')
 };
 
@@ -66,7 +66,7 @@ const sortByLength = (arr) => {
 //   function compareNumbers(a, b) {
 //     a.localeCompare(b);
 //   }
-  arr.sort(function(a, b){
+  arr.sort((a, b)=>{
  
     return a.length - b.length;
   });
@@ -83,14 +83,14 @@ For example, ['Alphabet', 'alphabet', 'carrot', 'Zebra'] is correctly sorted, an
 
 const alphabetizeBetter = (arr) => {
   // Solution code here...
-  arr.sort(compareNumbers)
-  function compareNumbers(a, b) {
+  arr.sort((a, b) => {
    if( a.toLowerCase()==b.toLowerCase()){
      return a.localeCompare(b);
    }
    else{
      return a.localeCompare(b);
-   }  }
+   }  
+  });
   return  arr;
 };
 
@@ -127,7 +127,7 @@ For example, [1, 14, 0.2, -281, 54782] is only correctly sorted in that order.
 const sortNumbersByLength = (arr) => {
   // Solution code here...
   arr.sort((a,b=>{
-    return a.length-b.length
+     a.toString().length-b.toString().length
   }))
   return arr;
 };
@@ -152,6 +152,10 @@ const people = [
 
 const sortPeople = (arr) => {
   // Solution code here...
+  people.sort((a,b)=>{
+    a.lastName.toLowerCase().localeCompare(b.lastName.toLowerCase())
+  })
+  return people;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -308,7 +312,7 @@ describe('Testing challenge 7', () => {
   });
 });
 
-xdescribe('Testing challenge 8', () => {
+describe('Testing challenge 8', () => {
   test('It should sort people by their last names', () => {
     expect(sortPeople(people)).toStrictEqual([
       new Person('Casey', 'Codefellow', 38),
@@ -320,7 +324,7 @@ xdescribe('Testing challenge 8', () => {
   });
 });
 
-xdescribe('Testing challenge 9', () => {
+describe('Testing challenge 9', () => {
   test('It should sort people with more strict ordering', () => {
     const family = [
       new Person('Casey', 'Codefellows', 55),
@@ -341,7 +345,7 @@ xdescribe('Testing challenge 9', () => {
   });
 });
 
-xdescribe('Testing challenge 10', () => {
+describe('Testing challenge 10', () => {
   test('It should sort meetings by the day on which they happen', () => {
     const sortedMeetings = sortMeetingsByDay(meetings);
     expect(sortedMeetings.slice(0,2)).toEqual(expect.arrayContaining([new Meeting('Monday', '0900', '0945'), new Meeting('Monday', '0900', '1000')]));
