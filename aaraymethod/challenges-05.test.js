@@ -38,12 +38,18 @@ let $ = createSnippetWithJQuery(`
 
 const templateWithJQuery = () => {
   // Solution code here...
-// var copy= $('#template');
-
- $('section h2').text(starWarsPeople[0].name)
- $('section h3').text(starWarsPeople[1].height)
- $('section p').text(starWarsPeople[2].eye_color)
-
+  starWarsPeople.forEach(member => {
+    let templet = $('#template').clone();
+    templet.html(`<h2>${member.name}</h2>
+    <br><h3>${member.height}</h3>
+    <br><p>${member.eye_color}</p>` 
+    )
+    $('section:nth-child(4) p').text('red');
+   
+    $('main').append(templet);
+  })
+  
+  // $('section:nth-child(4) p').text('red');
 //  var h2= copy.find('h2').text(starWarsPeople[0].name)
 //  var h3= copy.find('h3').text(starWarsPeople[1].height)
 //  var p= copy.find('p').text(starWarsPeople[2].eye_color)
@@ -85,9 +91,9 @@ For example, wordsToCharList('gregor') returns ['g','r','e','g','o','r'].
 ------------------------------------------------------------------------------------------------ */
 
 const wordsToCharList = (arr) => {
-   let r= arr.split("");
-   return r;
-  // Solution code here...
+   return arr.split("");
+   
+     // Solution code here...
 };
 
 
@@ -134,19 +140,12 @@ const gruffaloCrumble = {
 const listFoods = (recipe) => {
   let result = [];
   // Solution code here...
-  let re=['pounds','gallons','sized','cups']
-for(var i=0 ;recipe.ingredients.length ;i++){
-  var l=recipe.ingredients[i];
-    re.forEach(element=>{
-      if(/element/.test.l){
-        var str=l.indexOf(element);
-        var number=str+Number(element.length)
-        var r=l.slice(number)
-        result.push(r);
-      }
-    })
-}
-    return result;
+  recipe.ingredients.forEach(item => {
+    let firstSpace = item.slice(item.indexOf(' ')+1)
+    let secSpace=firstSpace.slice(firstSpace.indexOf(' ')+1)
+    result.push(secSpace)
+  })
+  return result;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -160,6 +159,17 @@ You may also use other string or array methods.
 const splitFoods = (recipe) => {
   let result = [];
   // Solution code here...
+  recipe.ingredients.forEach(item => {
+    let firstSpace = item.split(' ');
+    var str=firstSpace[2];
+ 
+     if(firstSpace.length>2){
+    for (var i=3 ; i<firstSpace.length;i++){
+      str +=' '+firstSpace[i];
+    }}
+    result.push(str)
+
+  })
   return result;
 };
 
@@ -175,6 +185,12 @@ Return a new array containing just the verbs. For example, ['Mix until evenly di
 
 const stepActions = (recipe) => {
   let result = [];
+  recipe.steps.forEach(item => {
+    let first = item.split(' ');
+    var str=first[0];
+     result.push(str)
+
+  })
   // Solution code here...
   return result;
 };
@@ -193,6 +209,13 @@ For example:
 ------------------------------------------------------------------------------------------------ */
 
 const removeEvenValues = (arr) => {
+  
+  arr.forEach((item,index)=>{
+    if(item%2==0){
+      arr.splice(index,1)
+    }
+  })
+  return arr;
   // Solution code here...
 };
 
@@ -300,20 +323,20 @@ describe('Testing challenge 4', () => {
   });
 });
 
-xdescribe('Testing challenge 5', () => {
+describe('Testing challenge 5', () => {
   test('It should return a list of foods', () => {
     expect(splitFoods(gruffaloCrumble)).toStrictEqual(['Gruffalo', 'oats', 'brown sugar', 'flour', 'pure maple syrup', 'chopped nuts', 'baking soda', 'baking powder', 'cinnamon', 'melted butter', 'fresh water']);
   });
 });
 
-xdescribe('Testing challenge 6', () => {
+describe('Testing challenge 6', () => {
   test('It should return a list of recipe steps', () => {
     expect(stepActions(gruffaloCrumble)).toStrictEqual(['Pre-heat', 'De-prickle', 'Sprinkle', 'Mix', 'Grease', 'Combine', 'Fold', 'Spread', 'Bake']);
     expect(stepActions(gruffaloCrumble).length).toStrictEqual(9);
   });
 });
 
-xdescribe('Testing challenge 7', () => {
+describe('Testing challenge 7', () => {
   test('It should remove the even numbers from the array', () => {
     let list = [1, 2, 3, 4, 5, 6];
     removeEvenValues(list);

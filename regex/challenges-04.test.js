@@ -99,8 +99,9 @@ Do not use the vertical bar (pipe) in your pattern.
 
 const matchMonth = (input) => {
   // Solution code here...
-  let reg=oct;
-  return 
+  let reg=/\b(Oct|october)\b/gi;
+  var arr=reg.test(input);
+  return arr;
 };
 
 /* ------------------------------------------------------------------------------------------------
