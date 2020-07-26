@@ -24,9 +24,9 @@ let $ = createSnippetWithJQuery(`
 
 const generateSubmitButton = () => {
   // Solution code here...
-  $('section').append('button')
+  var button =$('<button></button>').text('submit')
+  $('form').append(button);
 }
-
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 2
 
@@ -55,8 +55,14 @@ Return an array containing all the matches.
 
 const isCapitalized = (str) => {
   // Solution code here...
-  let reg=/[A-Z]/g;
-  return str.match(reg) ;
+  let reg=/([A-Z][A-z]+)/g;
+  let  res= str.match(reg) ;
+   if(res=== null){
+     return []
+   }
+   else{
+     return res;
+   };
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -67,8 +73,13 @@ Write a function named citiesAtoJ that takes in an array of city names and uses 
 
 const citiesAtoJ = (arr) => {
   // Solution code here...
-  result=arr.match(/[A-J]/g);
-  return result
+  let newarray=[];
+  var reg =/^[A-J]\w*/g ;
+  arr.forEach(element => {
+    if(element.match(reg))
+    newarray.push(element);
+  });
+  return newarray;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -85,8 +96,9 @@ Do not use the vertical bar (pipe) in your pattern.
 
 const matchMonth = (input) => {
   // Solution code here...
-  let reg=oct;
-  return 
+  let reg=/\b(Oct|october|October|oct)\b/g;
+  var arr=reg.test(input);
+  return arr;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -101,6 +113,8 @@ The expected output of "Hello, and have a wonderful day!" is ["and ", "have ", "
 
 const noPunctuation = str => {
   // Solution code here...
+  let reg=/\b([A-z]|[0-9])+\s/gi;
+  return str.match(reg);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -117,6 +131,8 @@ For example, 'Welcome to Code 301!' will return 'W_lc_m_ t_ C_d_ 301!'.
 
 let hangman = (str) => {
   // Solution code here...
+  let reg=/a|e|i|o|u/gi;
+  return str.replace(reg,'_')
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -133,6 +149,10 @@ const seashells = 'She sells seashells by the seashore. The shells she sells are
 
 const findShells = (str) => {
   // Solution code here...
+  let reg=/\w+ells\b/g;
+  let result=str.match(reg);
+  return result
+
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -195,7 +215,7 @@ describe('Testing challenge 4', () => {
   });
 });
 
-xdescribe('Testing challenge 5', () => {
+describe('Testing challenge 5', () => {
   test('It should match any of the acceptable inputs', () => {
     expect(matchMonth('Oct')).toBeTruthy();
     expect(matchMonth('oct')).toBeTruthy();
@@ -213,7 +233,7 @@ xdescribe('Testing challenge 5', () => {
   });
 });
 
-xdescribe('Testing challenge 6', () => {
+describe('Testing challenge 6', () => {
   const lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras lacinia vel massa sed egestas. Nunc faucibus iaculis elit, a scelerisque enim condimentum sed. Aenean ac scelerisque sem, et pharetra diam.';
 
   test('It should only return words that are immediately followed by a space', () => {
@@ -227,7 +247,7 @@ xdescribe('Testing challenge 6', () => {
   });
 });
 
-xdescribe('Testing challenge 7', () => {
+describe('Testing challenge 7', () => {
   let startString = 'This is a regex challenge. We are trying to create a hangman phrase where all of the vowels are missing!';
 
   test('It should remove the vowels from the hangman string and replace them with underscores', () => {
@@ -240,7 +260,7 @@ xdescribe('Testing challenge 7', () => {
   });
 });
 
-xdescribe('Testing challenge 8', () => {
+describe('Testing challenge 8', () => {
   test('It should return an array of instances of "sells", shells", and "seashells"', () => {
     expect(findShells(seashells)).toStrictEqual(['sells', 'seashells', 'shells', 'sells', 'seashells', 'sells', 'shells', 'sells', 'shells']);
     expect(findShells(seashells).length).toStrictEqual(9);

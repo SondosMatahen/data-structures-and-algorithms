@@ -42,17 +42,18 @@ const templateWithJQuery = () => {
     let templet = $('#template').clone();
     templet.html(`<h2>${member.name}</h2>
     <br><h3>${member.height}</h3>
-    <br><p>${member.eye_color}</p>` 
-    )
+    <br><p>${member.eye_color}</p>`)
     $('section:nth-child(4) p').text('red');
     $('main').append(templet);
   })
   
-  // $('section:nth-child(4) p').text('red');
-//  var h2= copy.find('h2').text(starWarsPeople[0].name)
-//  var h3= copy.find('h3').text(starWarsPeople[1].height)
-//  var p= copy.find('p').text(starWarsPeople[2].eye_color)
-// $('main').append(copy);
+  //starWarsPeople.forEach(element=>{
+  //let clonItem= $('#template').clone();
+  // clonItem.removeAttr('id');
+//  clonItem.find('h2').html(elment.name)
+//  clonItem.find('h3').html(elment.height)
+//  clonItem.find('p').html(elment.eye_color)
+// clonItem.appendTo('main'); })
 
 }
 
