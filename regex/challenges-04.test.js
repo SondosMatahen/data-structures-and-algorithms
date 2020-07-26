@@ -26,7 +26,7 @@ const generateSubmitButton = () => {
   // Solution code here...
   var button =$('<button></button>').text('submit')
   $('form').append(button);
-}
+
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 2
 
@@ -63,6 +63,7 @@ const isCapitalized = (str) => {
    else{
      return res;
    };
+
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -81,7 +82,6 @@ const citiesAtoJ = (arr) => {
   });
   return newarray;
 };
-
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 5 - Stretch Goal
 
@@ -96,7 +96,9 @@ Do not use the vertical bar (pipe) in your pattern.
 
 const matchMonth = (input) => {
   // Solution code here...
+
   let reg=/\b(Oct|october|October|oct)\b/g;
+
   var arr=reg.test(input);
   return arr;
 };

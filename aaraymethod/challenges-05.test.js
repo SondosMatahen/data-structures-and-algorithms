@@ -44,6 +44,7 @@ const templateWithJQuery = () => {
     <br><h3>${member.height}</h3>
     <br><p>${member.eye_color}</p>`)
     $('section:nth-child(4) p').text('red');
+   
     $('main').append(templet);
   })
   
