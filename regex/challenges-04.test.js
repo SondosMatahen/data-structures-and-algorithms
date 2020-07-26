@@ -24,7 +24,10 @@ let $ = createSnippetWithJQuery(`
 
 const generateSubmitButton = () => {
   // Solution code here...
-  $('section').append('button')
+  var button =$('<button></button>').text('submit')
+  $('form').append(button);
+ 
+ 
 }
 
 /* ------------------------------------------------------------------------------------------------
@@ -55,8 +58,15 @@ Return an array containing all the matches.
 
 const isCapitalized = (str) => {
   // Solution code here...
-  let reg=/[A-Z]/g;
-  return str.match(reg) ;
+  let reg=/([A-Z][A-z]+)/g;
+ let  res= str.match(reg) ;
+  if(res=== null){
+    return []
+  }
+  else{
+    return res;
+  };
+  
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -67,10 +77,14 @@ Write a function named citiesAtoJ that takes in an array of city names and uses 
 
 const citiesAtoJ = (arr) => {
   // Solution code here...
-  result=arr.match(/[A-J]/g);
-  return result
+  let newarray=[];
+  var reg =/^[A-J]\w*/g ;
+  arr.forEach(element => {
+    if(element.match(reg))
+    newarray.push(element);
+  });
+  return newarray;
 };
-
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 5 - Stretch Goal
 
