@@ -45,6 +45,7 @@ const templateWithJQuery = () => {
     <br><p>${member.eye_color}</p>` 
     )
     $('section:nth-child(4) p').text('red');
+   
     $('main').append(templet);
   })
   

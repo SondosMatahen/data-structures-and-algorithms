@@ -24,7 +24,10 @@ let $ = createSnippetWithJQuery(`
 
 const generateSubmitButton = () => {
   // Solution code here...
-  $('section').append('button')
+  var button =$('<button></button>').text('submit')
+  $('form').append(button);
+ 
+ 
 }
 
 /* ------------------------------------------------------------------------------------------------
@@ -55,8 +58,15 @@ Return an array containing all the matches.
 
 const isCapitalized = (str) => {
   // Solution code here...
-  let reg=/\b[A-Z][A-z]\w*/g;
-  return str.match(reg) ;
+  let reg=/([A-Z][A-z]+)/g;
+ let  res= str.match(reg) ;
+  if(res=== null){
+    return []
+  }
+  else{
+    return res;
+  };
+  
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -67,8 +77,13 @@ Write a function named citiesAtoJ that takes in an array of city names and uses 
 
 const citiesAtoJ = (arr) => {
   // Solution code here...
-  result=arr.match(/\b[A-J]\w*/g);
-  return result
+  let newarray=[];
+  var reg =/^[A-J]\w*/g ;
+  arr.forEach(element => {
+    if(element.match(reg))
+    newarray.push(element);
+  });
+  return newarray;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -85,8 +100,9 @@ Do not use the vertical bar (pipe) in your pattern.
 
 const matchMonth = (input) => {
   // Solution code here...
-  let reg=oct;
-  return 
+  let reg=/\b(Oct|october)\b/gi;
+  var arr=reg.test(input);
+  return arr;
 };
 
 /* ------------------------------------------------------------------------------------------------
