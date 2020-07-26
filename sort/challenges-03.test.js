@@ -85,11 +85,11 @@ const alphabetizeBetter = (arr) => {
   // Solution code here...
   arr.sort((a, b) => {
    if( a.toLowerCase()==b.toLowerCase()){
-     return a.localeCompare(b);
+      return 0;
    }
    else{
-     return a.localeCompare(b);
-   }  
+     return a.toLowerCase().localeCompare(b.toLowerCase());
+ }  
   });
   return  arr;
 };
@@ -126,9 +126,9 @@ For example, [1, 14, 0.2, -281, 54782] is only correctly sorted in that order.
 
 const sortNumbersByLength = (arr) => {
   // Solution code here...
-  arr.sort((a,b=>{
-     a.toString().length-b.toString().length
-  }))
+  arr.sort((a,b)=>{
+    return a.toString().length- b.toString().length
+  })
   return arr;
 };
 
@@ -152,10 +152,11 @@ const people = [
 
 const sortPeople = (arr) => {
   // Solution code here...
-  people.sort((a,b)=>{
-    a.lastName.toLowerCase().localeCompare(b.lastName.toLowerCase())
+  arr.sort((a,b)=>{
+  return a.lastName.toLowerCase().localeCompare(b.lastName.toLowerCase())
+  //  return b.lastName.toLowerCase().localeCompare(a.lastName.toLowerCase())
   })
-  return people;
+  return arr;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -170,6 +171,18 @@ If two people have the same full name, the younger one should come first. Do not
 
 const sortPeopleBetter = (arr) => {
   // Solution code here...
+  arr.sort((a,b)=>{
+    if((a.lastName.toLowerCase()==b.lastName.toLowerCase())&&(a.firstName.toLowerCase()==b.firstName.toLowerCase())){
+      return a.age-b.age
+    }
+    else if((a.lastName.toLowerCase()==b.lastName.toLowerCase())){
+      return a.firstName.toLowerCase().localeCompare(b.firstName.toLowerCase())
+    }
+    else{
+   return a.lastName.toLowerCase().localeCompare(b.lastName.toLowerCase())
+    }
+  })
+  return arr;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -196,6 +209,10 @@ const meetings = [
 
 const sortMeetingsByDay = (arr) => {
   // Solution code here...
+  arr.sort((a,b)=>{
+    return a.dayOfWeek.localeCompare(b.dayOfWeek)
+  })
+  return arr
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -227,6 +244,7 @@ $ = createSnippetWithJQuery(`
 
 const addPearClass = () => {
   // Solution code here...
+  $('#fruits :nth-child(3)').addClass('pear');
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -368,7 +386,7 @@ xdescribe('Testing challenge 11', () => {
   });
 });
 
-xdescribe('Testing challenge 12', () => {
+describe('Testing challenge 12', () => {
   test('It should add a class of pear to the thrid li', () => {
     addPearClass();
     expect($('li:nth-child(3)').hasClass('pear')).toBe(true);
