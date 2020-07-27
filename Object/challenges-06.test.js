@@ -199,11 +199,11 @@ const houseSize = (arr) => {
     let count=0;
     if(element.name!=null)
     {count++;}
-    if(element.spouse!=null)
-    {count++;}
+      if(element.spouse != null)
+      {count++;}
     function Object(element){
       this.house=element.house;
-      this.members=element.children.length+count;
+      this.members=Number(element.children.length+count);
       sizes.push(this)
     }
  let newHouse= new Object (element)
