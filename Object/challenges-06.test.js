@@ -71,7 +71,14 @@ let $ = createSnippetWithJQuery(`
 
 const templatingWithMustache = () => {
   // Solution code here...
-
+  let arr=[];
+  let template=$('#template').html();
+characters.forEach(element=>{
+  let result =Mustache.render(template,element);
+  $('#template').append(result);
+  arr.push(result);
+})
+return arr;
 
 };
 
@@ -188,6 +195,19 @@ For example: [{ house: 'Stark', members: 7 }, { house: 'Arryn', members: 3 }, ..
 const houseSize = (arr) => {
   const sizes = [];
   // Solution code here...
+  arr.forEach(element=>{
+    let count=0;
+    if(element.name!=null)
+    {count++;}
+      if(element.spouse != null)
+      {count++;}
+    function Object(element){
+      this.house=element.house;
+      this.members=Number(element.children.length+count);
+      sizes.push(this)
+    }
+ let newHouse= new Object (element)
+   })
   return sizes;
 };
 
@@ -205,7 +225,8 @@ This function should create an object for each house containing the name of the 
 All of these objects should be added to an array named "survivors". Return the "survivors" array from the function.
 
 For example: [ { house: 'Stark', members: 6 }, { house: 'Arryn', members: 2 }, ... ].
------------------------------------------------------------------------------------------------- */
+---------------------------------------------------
+--------------------------------------------- */
 
 const deceasedSpouses = ['Catelyn', 'Lysa', 'Robert', 'Khal Drogo', 'Alerie'];
 
@@ -273,7 +294,7 @@ describe('Testing challenge 6', () => {
   });
 });
 
-xdescribe('Testing challenge 7', () => {
+describe('Testing challenge 7', () => {
   test('It should return an object for each house containing the name and size', () => {
     expect(houseSize(characters)).toStrictEqual([{ house: 'Stark', members: 7 }, { house: 'Arryn', members: 3 }, { house: 'Lannister', members: 5 }, { house: 'Targaryen', members: 5 }, { house: 'Tyrell', members: 4 }, { house: 'Greyjoy', members: 1 }, { house: 'Snow', members: 1 }]);
     expect(houseSize(characters).length).toStrictEqual(7);
