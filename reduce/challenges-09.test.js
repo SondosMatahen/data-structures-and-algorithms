@@ -27,6 +27,7 @@ const createServer = () => {
 
   // Routes go here
   // Solution code here...
+  app.get(`/events`,getCurrentEvents)
 
   var server = app.listen(3301, function () {
     var port = server.address().port;
@@ -161,10 +162,14 @@ const currentEvents = {
 
 function getCurrentEvents(request, response){
   // Solution code here...
+ return mapCurrentEvents().then((data)=>{
+  response.send(data);
+  });
 }
 
 const mapCurrentEvents = () => {
   // Solution code here...
+  currentEvents.news.map()
 }
 
 function Event(obj){
