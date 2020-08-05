@@ -27,6 +27,7 @@ const createServer = () => {
 
   // Routes go here
   // Solution code here...
+
   app.get(`/events`,getCurrentEvents)
 
   var server = app.listen(3301, function () {
@@ -161,19 +162,34 @@ const currentEvents = {
 }
 
 function getCurrentEvents(request, response){
-  // Solution code here...
- return mapCurrentEvents().then((data)=>{
-  response.send(data);
-  });
+  // // Solution code here...
+
+  response.status(200).send(mapCurrentEvents());
+  // mapCurrentEvents().then(data=>{
+  //   response.status(200).sednd(data)
+  // })
+
 }
 
 const mapCurrentEvents = () => {
   // Solution code here...
-  currentEvents.news.map()
+ return currentEvents.news.map(e=>{
+    return new Event (e)
+
+ })
+//  return arr;
 }
 
 function Event(obj){
   // Solution code here...
+  this.author=obj.author;
+  this.categories=obj.category;
+  this.summary=obj.description;
+  this.img_url=obj.url;
+  this.date=obj.published;
+  this.title=obj.title;
+
+
 }
 
 /* ------------------------------------------------------------------------------------------------
@@ -186,6 +202,11 @@ Note: You may not use the array's built-in length property.
 
 const countNumberOfElements = (arr) => {
   // Solution code here...
+  let sum=arr.reduce(element=>{
+     element=element+1
+      return element;
+  },0);
+  return sum;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -246,6 +267,11 @@ let starWarsData = [{
 
 const returnNames = (arr) => {
   // Solution code here...
+  return arr.reduce((accumulator, chara) =>{
+  accumulator.push(chara.name);
+  return accumulator;
+  },[])
+
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -258,6 +284,10 @@ Note: You must use reduce for this challenge. You may not use the built-in .reve
 
 const reversedString = (str) => {
   // Solution code here...
+  return str.split('').reduce((acc,element)=>{
+    acc=element+acc;
+    return acc
+  })
 };
 
 /* ------------------------------------------------------------------------------------------------
