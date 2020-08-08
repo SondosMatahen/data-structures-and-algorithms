@@ -8,13 +8,37 @@ Build a simple express server. Connect a '/hello' route that sends a greeting of
 
 const createServer = () => {
   // Solution code here...
+  const express = require('express');
+  const app = express();
+
 
   var server = app.listen(3301, function () {
     var port = server.address().port;
     console.log('Example app listening at port', port);
   });
+
+  app.get('/hello',(req,res)=>{
+    res.status(200).send('hello')
+  })
+
+  app.get('/aboutme',(req,res)=>{
+    res.status(200).send('short bio')
+  })
+
+
+  app.get('/favoritefoods',(req,res)=>{
+    const arr=['appale','blue-barry','carrot'];
+    res.status(200).send(['appale','blue-barry','carrot'])
+  })
+
+   //404
+   app.all('*', (req, res) => {
+    res.status(404).send('Not Found');
+  });
+
   return server;
 };
+
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 2
@@ -76,6 +100,15 @@ For example, [ [0,2,5,4], [2,4,10], [] ] should return [ [1, 32], [1024], [] ].
 
 const divisibleByFiveTwoToThePower = (input) => {
   // Solution code here...
+  return input.map(e=>{
+    let arr=[]
+      e.map(el=>{
+      if (el%5==0 && typeof(el)=='number')
+     arr.push(Math.pow(2,el))
+      
+      })
+       return arr
+     })
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -142,6 +175,13 @@ let starWarsData = [{
 
 let findMaleAndFemale = (data) => {
   // Solution code here...
+  let arr=[]
+  data.map(el=>{ 
+       if(el.gender=='female'||el.gender=='male')
+       arr.push(el.name) 
+    })
+    arr= arr.join(" and ")
+    return arr
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -152,6 +192,14 @@ Write a function named findShortest that, given the Star Wars data from Challeng
 
 let findShortest = (data) => {
   // Solution code here...
+  return data.reduce((acc, element) => {
+    if (parseInt(element.height) < acc['hight']) {
+        acc['hight'] = parseInt(element.height);
+        acc['e'] = element.name;
+    }
+    return acc;
+}, { hight: 500, e: '' }).e;
+
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -238,14 +286,14 @@ describe('Testing challenge 4', () => {
   });
 });
 
-xdescribe('Testing challenge 5', () => {
+describe('Testing challenge 5', () => {
   test('It should return only characters that are male or female', () => {
     expect(findMaleAndFemale(starWarsData)).toStrictEqual('Luke Skywalker and Darth Vader and Leia Organa');
     expect(findMaleAndFemale([{ name: 'person', gender: 'female' }, { gender: 'lol' }, { name: 'persontwo', gender: 'male' }])).toStrictEqual('person and persontwo');
   });
 });
 
-xdescribe('Testing challenge 6', () => {
+describe('Testing challenge 6', () => {
   test('It should return the name of the shortest character', () => {
     expect(findShortest(starWarsData)).toStrictEqual('R2-D2');
   });
