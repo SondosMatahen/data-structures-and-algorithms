@@ -129,17 +129,18 @@ hasChildrenValues(characters, 'Sansa') will return false
 
 const hasChildrenValues = (arr, character) => {
   // Solution code here...
-  let hasChild=false;
-  arr.forEach(elment=>{
-    Object.values(elment).forEach(value=>{
-        if(value===character)
-        hasChild = true ;
+  for(let i =0 ; i<arr.length ; i++){
+    if(arr[i].name===character){
+    if (Object.values( arr[i].children)==[]){
+        return false;
+    
+    }
+    else if(!(Object.values(arr[i].children)==[])){
+        return true;
+    }
+  }
 
-    }) 
-   
-  })
-  return hasChild;
-  
+}  
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -152,16 +153,21 @@ The input and output of this function are the same as the input and output from 
 
 const hasChildrenEntries = (arr, character) => {
   // Solution code here...
-  let hasChild=false;
-  arr.forEach(elment=>{
-    Object.entries(elment).forEach(value=>{
-        if(value[1]===character)
-        hasChild = true ;
+  for(let i =0 ; i<arr.length ; i++){
+    if(arr[i].name===character){
+    if (Object.values( arr[i].children)==[]){
+        return false;
+    
+    }
+    else if((Object.values(arr[i].children)!=[])){
+        return true;
+    }
+  }
+  else{
+    return false;
+  }
 
-    }) 
-   
-  })
-  return hasChild;
+}  
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -197,16 +203,17 @@ const houseSize = (arr) => {
   // Solution code here...
   arr.forEach(element=>{
     let count=0;
+   
     if(element.name!=null)
     {count++;}
-      if(element.spouse != null)
+    
+    if(element.spouse != null)
       {count++;}
-    function Object(element){
-      this.house=element.house;
-      this.members=Number(element.children.length+count);
-      sizes.push(this)
-    }
- let newHouse= new Object (element)
+   
+      let house=element.house;
+      let members=element.children.length + count;
+       sizes.push({house:house, members:members})
+
    })
   return sizes;
 };
@@ -233,6 +240,21 @@ const deceasedSpouses = ['Catelyn', 'Lysa', 'Robert', 'Khal Drogo', 'Alerie'];
 const houseSurvivors = (arr) => {
   const survivors = [];
   // Solution code here...
+  arr.forEach(element=>{
+    let count=0;
+   
+    if(element.name!=null)
+    {count++;}
+    
+    // if(element.spouse != null)
+    //   {count++;}
+   
+      let house=element.house;
+      let members=element.children.length + count;
+       survivors.push({house:house, members:members})
+
+   })
+ 
   return survivors;
 };
 
@@ -301,7 +323,7 @@ describe('Testing challenge 7', () => {
   });
 });
 
-xdescribe('Testing challenge 8', () => {
+describe('Testing challenge 8', () => {
   test('It should not include any deceased spouses', () => {
     expect(houseSurvivors(characters)).toStrictEqual([{ house: 'Stark', members: 6 }, { house: 'Arryn', members: 2 }, { house: 'Lannister', members: 4 }, { house: 'Targaryen', members: 4 }, { house: 'Tyrell', members: 3 }, { house: 'Greyjoy', members: 1 }, { house: 'Snow', members: 1 }]);
   });
