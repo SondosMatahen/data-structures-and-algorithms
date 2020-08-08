@@ -28,6 +28,14 @@ For example, count(5, [[1, 3, 5, 7, 9], [5, 5, 5], [1, 2, 3]]) returns 4.
 
 const count = (target, input) => {
   // Solution code here...
+  let count=0;
+  input.map(el=>{
+    el.filter(val=>{
+      if (val==target)
+      count++
+    })
+  })
+  return count
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -36,12 +44,22 @@ CHALLENGE 3
 Write a function that, given an array of integer arrays as input, calculates the total sum of all the elements in the array.
 
 You may want to use filter, map, or reduce for this problem, but are not required to. You may need to use the same method more than once.
-
+.
 For example, [[1, 2, 3, 4, 5], [6, 7, 2, 4, 5, 7], [9, 2, 3, 6,]] returns 66.
 ------------------------------------------------------------------------------------------------ */
 
 const totalSum = (input) => {
   // Solution code here...
+  let sum=0;
+  input.map(e=>{
+   let total= e.reduce((acc,val)=>{
+     acc+=val;
+     return acc
+   });
+   sum+=total
+  return total
+ });
+ return sum;
 };
 
 /* ------------------------------------------------------------------------------------------------
