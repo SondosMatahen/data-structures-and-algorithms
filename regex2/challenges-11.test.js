@@ -31,7 +31,7 @@ If the PIN is four numerical digits long, return true. Otherwise, return false.
 
 const validatePin = (pin) => {
   // Solution code here...
-  let reg=/\b[0-9][0-9][0-9][0-9]\b/;
+  let reg=/\b\d{4}\b/;
   return reg.test(pin) ;
 };
 
@@ -53,6 +53,8 @@ Note: if you ever need to validate an email using a regex in practice, the Inter
 
 const validateEmail = (email) => {
   // Solution code here...
+  let reg=/^\w+\.?\w+@\w+(.net|.com|.org)\b/
+  return reg.test(email)
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -78,6 +80,8 @@ Return either true or false.
 
 const validatePhoneNumber = (phoneNumber) => {
   // Solution code here...
+  let reg=/^((\(\d{3}\))|\d{3}\-?)\s?\d{3}\-?\s?\d{4}$/;
+  return reg.test(phoneNumber);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -91,6 +95,20 @@ findTagNames(['<div><h1>Hello, world!</h1></div>', '<p>Welcome to my site</p>'])
 
 const findTagNames = elements => {
   // Solution code here...
+  let reg=/\/\w+/g;
+  let arr=[];
+  elements.map(e=>{
+  arr.push(e.match(reg))
+   })
+   let final=[];
+  
+   arr.map(e=>{
+     e.map(el=>{
+       final.push(el);
+     })
+   })
+  
+    return final
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -180,7 +198,7 @@ describe('Testing challenge 4', () => {
   });
 });
 
-xdescribe('Testing challenge 5', () => {
+describe('Testing challenge 5', () => {
   test('It should return the closing tags', () => {
     expect(findTagNames(['<h1>Hello, world!</h1>', '<p>Welcome to my site</p>'])).toStrictEqual(['/h1', '/p']);
   });
