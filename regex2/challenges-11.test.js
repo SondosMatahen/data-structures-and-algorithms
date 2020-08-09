@@ -107,7 +107,6 @@ const findTagNames = elements => {
        final.push(el);
      })
    })
-  
     return final
 };
 
