@@ -13,33 +13,25 @@ const createServer = () => {
   const app = express();
  
 
+  app.get('/', function (req, res) {
+    res.status(200).send('ok');
+  });
+
+  app.delete('/things/1', function (req, res) {
+    res.sendStatus(405);
+  });
+
+  app.all('*', function (req, res) {
+    res.sendStatus(404);
+  });
+  var server = app.listen(3000, function () {
+    var port = server.address().port;
+    console.log('Example app listening at port', port);
+  });
+  return server;
   // solution code goes here ...
  
 
-// app.get('/',(req,res)=>{
-//     res.status(200).send('ok');
-// });
-// app.delete('/things/1',(req,res)=>{
-//     res.status(405).end();
-// });
-// app.all('*', (req, res) => {
-//   res.status(404).send('Not Found');
-// });
-
-app.get('/', function (req, res) {
-  res.status(200).send('ok');
-});
-
-app.delete('/things/1', function (req, res) {
-  res.sendStatus(405);
-});
-
-var server = app.listen(3000, function () {
-  var port = server.address().port;
-  console.log('Example app listening at port', port);
-});
-
-  return server;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -158,14 +150,7 @@ This data could be sorted by name or price.
 
 const sortBy = (property, arr) => {
   // Solution code here...
-  arr.sort((a, b) =>{
-    if(a.property < b.property){
-      return -1;
-    }else{
-      return 1;
-    } 
-  })
-  return arr
+  return arr.sort((a, b) => (a[property] > b[property]) ? 1 : -1)
 };
 
 /* ------------------------------------------------------------------------------------------------
